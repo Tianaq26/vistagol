@@ -4,7 +4,7 @@
 
 VistaGol es un sistema de boletería con visualización 3D del estadio: el aficionado explora el estadio, elige una sección, selecciona su asiento en el mapa y ve **exactamente cómo se ve la cancha desde esa butaca** antes de pagar. Ningún club de Primera División de Costa Rica ofrece esto hoy — ni los sistemas de ticketing que actualmente alquilan los clubes grandes lo incluyen.
 
-> 🎯 **Demo en vivo:** _(publicá el repo en GitHub Pages y pegá el link aquí)_
+> 🎯 **Demo en vivo:** https://tianaq26.github.io/vistagol/
 
 ---
 
@@ -19,16 +19,17 @@ VistaGol es un sistema de boletería con visualización 3D del estadio: el afici
 
 ## Cómo funciona la demo
 
-1. **Vista general** — el estadio completo en 3D, navegable con el mouse (rotar, zoom).
-2. **Clic en una sección** — la cámara vuela hacia la zona y se abre el mapa de asientos con disponibilidad y precio.
+1. **Vista general** — el estadio completo en 3D, navegable con el mouse (rotar, zoom), o en **plano 2D** cenital con el toggle de la barra superior.
+2. **Clic en una sección** — en 3D la cámara vuela hacia la zona y se abre el mapa de asientos; en 2D el plano hace zoom y muestra cada asiento con su disponibilidad.
 3. **Elegir asiento** — aparece la "entrada" con el código del asiento (ej. `O3-F12-14`).
-4. **"Ver desde este asiento"** — la cámara vuela hasta la butaca exacta y podés mirar alrededor en primera persona, como si estuvieras sentado ahí.
+4. **"Ver desde este asiento"** — la cámara vuela hasta la butaca exacta y podés mirar alrededor en primera persona, como si estuvieras sentado ahí. Funciona igual desde el plano 2D: seleccionás en el plano y saltás directo a la vista 3D.
 5. **Comprar** — en esta demo el flujo termina en un paso simulado; en producción conecta con la pasarela de pago del club (tarjeta, SINPE Móvil) y emite el boleto con QR.
 
 ## Stack técnico
 
 - **Three.js** — render 3D en el navegador, sin plugins ni descargas.
-- **Estadio procedural** — gradas, techo, torres de iluminación y **+9,000 asientos** generados por código con `InstancedMesh` (un solo draw call: corre fluido incluso en celulares).
+- **Estadio procedural** — gradas en dos niveles (platea + palco), techos, marcador, vallas LED, torres de iluminación y **+10,700 asientos** generados por código con `InstancedMesh` (un solo draw call: corre fluido incluso en celulares).
+- **Plano 2D interactivo** — vista cenital en SVG generada desde los mismos datos del mundo 3D: mismas secciones, mismos asientos, mismas coordenadas. Zoom animado por sección y selección de asiento directo en el plano.
 - **Datos de asientos** — cada butaca tiene posición real en el mundo 3D, sección, fila, número, precio y estado de disponibilidad.
 - **Vanilla JS + esbuild** — sin frameworks; el bundle final es un solo archivo estático. Se hospeda gratis en GitHub Pages / Vercel / Netlify.
 
@@ -66,6 +67,7 @@ vistagol/
 ├── app.js            # Bundle compilado (listo para producción)
 ├── src/
 │   ├── main.js       # Cámara, transiciones, controles, lógica de UI
+│   ├── map2d.js      # Plano 2D interactivo (SVG) del estadio
 │   └── stadium.js    # Generador procedural del estadio y asientos
 └── docs/
     └── PROPUESTA.md  # One-pager para presentar a clubes

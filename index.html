@@ -40,9 +40,27 @@
     <span class="brand-mark"></span>
     <span class="brand-name">VISTAGOL</span>
   </div>
+  <div class="view-toggle hidden" id="view-toggle" role="group" aria-label="Cambiar vista">
+    <button id="btn-view3d" class="seg active">Estadio 3D</button>
+    <button id="btn-view2d" class="seg">Plano 2D</button>
+  </div>
   <div class="topbar-hint" id="hint">Hacé clic en una sección del estadio para ver los asientos</div>
   <button id="btn-reset" class="btn btn-ghost hidden">← Vista general</button>
 </header>
+
+<!-- ===== Plano 2D ===== -->
+<div id="map2d" class="map2d hidden">
+  <div class="map2d-top">
+    <button id="map-back" class="btn btn-ghost hidden">← Todo el estadio</button>
+    <div class="map2d-title" id="map-title">Elegí una sección del estadio</div>
+    <div class="legend legend-2d">
+      <span><i class="dot dot-free"></i>Disponible</span>
+      <span><i class="dot dot-taken"></i>Vendido</span>
+      <span><i class="dot dot-sel"></i>Tu selección</span>
+    </div>
+  </div>
+  <svg id="map-svg" aria-label="Plano del estadio"></svg>
+</div>
 
 <!-- ===== Section / seat panel ===== -->
 <aside id="panel" class="panel hidden">
